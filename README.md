@@ -5,7 +5,7 @@ In this game, you're a farmer where you plant trees and harvest fruits to sell t
 `mapster.ino` is the original game for the Arduino, this is what I'm trying to make!
 
 ![A screenshot of Mapster gameplay](MapsterGameplay.jpg)
-![A video of Mapster gameplay](MapsterGameplay.mp4)
+![A video of Mapster gameplay](MapsterGameplay.gif)
 
 ## Installation
 
