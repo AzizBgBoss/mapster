@@ -1,0 +1,20 @@
+# Compiler and linker
+CC = gcc
+CFLAGS = -Wall -Wextra -g `pkg-config --cflags sdl2 SDL2_ttf`
+LDFLAGS = `pkg-config --libs sdl2 SDL2_ttf`
+
+# Project name
+TARGET = mapster
+
+# Source files
+SRC = source/main.c
+
+# Build target
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRC) $(LDFLAGS)
+
+# Clean up build artifacts
+clean:
+	rm -f $(TARGET)
