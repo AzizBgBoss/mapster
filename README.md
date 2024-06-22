@@ -1,6 +1,6 @@
 # Mapster
 
-Mapster is a game originally created by a 15-year-old for Arduino, now adapted for the Nintendo Switch, PC, and more using the C language upon turning 16.
+Mapster is a game/homebrew originally created by a 15-year-old for Arduino, now adapted for the Nintendo Switch, PC, and more using the C language upon turning 16.
 
 ## Installation
 
