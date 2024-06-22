@@ -29,7 +29,7 @@ Download the `mapster.nro` file from the releases section and copy it to `/switc
 
 ## Planned Features
 
-- Add taxes and watering, like the original game.
+- Add random tips.
 - Better sprites
 - Analog control
 - Co-op multiplayer
@@ -37,7 +37,7 @@ Download the `mapster.nro` file from the releases section and copy it to `/switc
 - Fully port the game to PC, 3DS, Wii U, PSP and many other platforms devkitpro supports.
 
 ## Facts About the Gameplay
-- Trees will continue to grow even when the game is suspended. They will also grow after you close the game and reload your save.
+- Coins have a slim chance to spawn randomly if you have no money, just to save you buddy.
 
 ## Contribution
 

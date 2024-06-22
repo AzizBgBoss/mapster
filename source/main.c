@@ -138,6 +138,9 @@ int main(int argc, char *argv[])
     int seeds = 0;
     int hoes = 0;
     int fruits = 0;
+    int water = 0;
+    int taxtime = 100;
+    int tax = 1;
 
     int move_speed = 3;
     int xOffset = 0;
@@ -161,6 +164,7 @@ int main(int argc, char *argv[])
     mapelements[15][17] = SEEDVILLAGER;
     mapelements[16][17] = HOEVILLAGER;
     mapelements[17][17] = FRUITVILLAGER;
+    mapelements[19][17] = WATER;
 
     // Define the top rectangle
     SDL_Rect topRect;
@@ -356,6 +360,9 @@ int main(int argc, char *argv[])
                         fwrite(&hoes, sizeof(int), 1, fp);
                         fwrite(&fruits, sizeof(int), 1, fp);
                         fwrite(&latest_tick, sizeof(int), 1, fp);
+                        fwrite(&water, sizeof(int), 1, fp);
+                        fwrite(&taxtime, sizeof(int), 1, fp);
+                        fwrite(&tax, sizeof(int), 1, fp);
 
                         // Write 2D arrays
                         fwrite(mapelements, sizeof(int), WORLD_WIDTH * WORLD_HEIGHT, fp);
@@ -380,6 +387,9 @@ int main(int argc, char *argv[])
                         fread(&hoes, sizeof(int), 1, fp);
                         fread(&fruits, sizeof(int), 1, fp);
                         fread(&latest_tick, sizeof(int), 1, fp);
+                        fread(&water, sizeof(int), 1, fp);
+                        fread(&taxtime, sizeof(int), 1, fp);
+                        fread(&tax, sizeof(int), 1, fp);
 
                         // Read 2D arrays
                         fread(mapelements, sizeof(int), WORLD_WIDTH * WORLD_HEIGHT, fp);
@@ -426,6 +436,19 @@ int main(int argc, char *argv[])
                         }
                         else
                             notice("You got no fruits!", notice_text, &notice_time);
+                        break;
+                    }
+                    case WATER:
+                    {
+                        if (money)
+                        {
+                            money--;
+                            water += 500;
+                            if (sound[1])
+                                Mix_PlayChannel(-1, sound[1], 0);
+                        }
+                        else
+                            notice("You insufficient funds!", notice_text, &notice_time);
                         break;
                     }
                     case FARMLAND:
@@ -520,6 +543,11 @@ int main(int argc, char *argv[])
         case FRUITVILLAGER:
         {
             tip = "4 coins for 1 fruit";
+            break;
+        }
+        case WATER:
+        {
+            tip = "500 liters for 1 coin";
             break;
         }
         default:
@@ -634,7 +662,7 @@ int main(int argc, char *argv[])
 
         // Render the seeds text
         char seedText[128];
-        sprintf(seedText, "Money: %d dollars | Seeds: %d | Hoes: %d | Fruits: %d", money, seeds, hoes, fruits);
+        sprintf(seedText, "Money: %d dollars | Seeds: %d | Hoes: %d | Fruits: %d | Water: %d | Tax: %d dollars at %d secs", money, seeds, hoes, fruits, water, tax, taxtime);
         SDL_Surface *textSurface = TTF_RenderText_Solid(font, seedText, (SDL_Color){255, 255, 255, 255});
         SDL_Texture *textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
 
@@ -696,24 +724,53 @@ int main(int argc, char *argv[])
             SDL_DestroyTexture(textTexture);
         }
 
-        while ((int)time(NULL) > latest_tick)
+        while ((int)time(NULL) - latest_tick > 1)
         {
             for (int y = 0; y < WORLD_HEIGHT; y++)
             {
                 for (int x = 0; x < WORLD_WIDTH; x++)
                 {
+                    if (!mapelements[x][y] && !money)
+                    {
+                        if (rand() % 10000 < 1)
+                        {
+                            mapelements[x][y] = COIN;
+                        }
+                    }
                     if (treeage[x][y] > 0 && treeage[x][y] < 3)
                     {
-                        if (rand() % 1000 < 16)
+                        if (water)
                         {
-                            treeage[x][y]++;
-                            if (sound[0])
-                                Mix_PlayChannel(-1, sound[0], 0);
+                            if (rand() % 100 < 1)
+                            {
+                                treeage[x][y]++;
+                                if (sound[0])
+                                    Mix_PlayChannel(-1, sound[0], 0);
+                            }
+                            water--;
+                        }
+                        else
+                        {
+                            if (rand() % 500 < 1)
+                            {
+                                treeage[x][y]--;
+                            }
+                            notice("You're out of water! Water your trees quick before they die!", notice_text, &notice_time);
                         }
                     }
                 }
             }
-            latest_tick++;
+            taxtime--;
+            if (!taxtime)
+            {
+                if (money > tax)
+                    money -= tax;
+                else
+                    money = 0;
+                taxtime = 600;
+                tax = rand() % 20;
+            }
+            latest_tick = (int)time(NULL);
         }
 
         // Update the screen
