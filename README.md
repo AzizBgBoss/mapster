@@ -11,8 +11,8 @@ Download the `mapster.nro` file from the releases section and copy it to `/switc
 ### Compile It Yourself
 
 1. Install [DevkitPro](https://devkitpro.org/). Make sure to select the Switch option during installation.
-2. Open MSYS2 or any terminal emulator of your choice.
-3. Navigate to the directory where you extracted the source code.
+2. Open MSYS2.
+3. Navigate to the directory where you extracted the source code, where you can find the Makefile.
 4. Run the following command: make
 
 ## Controls
