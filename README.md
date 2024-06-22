@@ -22,6 +22,16 @@ Download the `mapster.nro` file from the releases section and copy it to `/switc
 - **Plus (+):** Quit the game
 - **Save/Load Tile:** Interact with this tile to save or load your progress to/from `sdmc:/switch/mapster.bin`
 
+## Planned Features
+
+- Better sprites
+- Analog control
+- Co-op multiplayer
+- Optimize the code for improved performance
+
+## Facts About the Gameplay
+- Trees will continue to grow even when the game is suspended. They will also grow after you close the game and reload your save.
+
 ## Contribution
 
 Contributions are greatly appreciated! Feel free to fork this repository and submit pull requests with your enhancements or bug fixes.
