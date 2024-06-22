@@ -28,6 +28,7 @@ Download the `mapster.nro` file from the releases section and copy it to `/switc
 - Analog control
 - Co-op multiplayer
 - Optimize the code for improved performance
+- Fully port the game to PC, 3DS, Wii U, PSP and many other platforms devkitpro supports.
 
 ## Facts About the Gameplay
 - Trees will continue to grow even when the game is suspended. They will also grow after you close the game and reload your save.
