@@ -1,6 +1,8 @@
 # Mapster
 
 Mapster is a game/homebrew originally created by a 15-year-old for Arduino, now adapted for the Nintendo Switch, PC, and more using the C language upon turning 16.
+In this game, you're a farmer where you plant trees and harvest fruits to sell them and pay your taxes!
+`mapster.ino` is the original game for the Arduino, this is what I'm trying to make!
 
 ## Installation
 
@@ -24,6 +26,7 @@ Download the `mapster.nro` file from the releases section and copy it to `/switc
 
 ## Planned Features
 
+- Add taxes and watering, like the original game.
 - Better sprites
 - Analog control
 - Co-op multiplayer
